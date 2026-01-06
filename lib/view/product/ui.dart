@@ -1,11 +1,8 @@
-
-
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import '../../Controller/services/ui.dart';
+import '../../Controller/UiServices/ui.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -15,27 +12,30 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-
-  List Pdata =[];
+  List Pdata = [];
   @override
-  getdata()async{
-   Pdata= await ProudctController().getProduct();
-   setState(() {
-
-   });
-   log("==============${Pdata}");
+  getdata() async {
+    Pdata = await ProudctController().getProduct();
+    setState(() {});
+    log("==============${Pdata}");
   }
+
   @override
   void initState() {
     getdata();
     super.initState();
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
         centerTitle: true,
-        title: Text("This is a Product pages",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 20),),),
+        title: Text(
+          "This is a Product pages",
+          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+        ),
+      ),
       body: ListView.builder(
         itemCount: Pdata.length,
         padding: EdgeInsets.all(10),
@@ -50,8 +50,6 @@ class _ProductScreenState extends State<ProductScreen> {
               padding: EdgeInsets.all(10),
               child: Row(
                 children: [
-
-
                   Container(
                     width: 150,
                     height: 130,
@@ -69,13 +67,10 @@ class _ProductScreenState extends State<ProductScreen> {
 
                   SizedBox(width: 12),
 
-
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
-
                         Text(
                           "${Pdata[index]["title"]}",
                           style: TextStyle(
@@ -94,7 +89,6 @@ class _ProductScreenState extends State<ProductScreen> {
                           ),
                         ),
 
-
                         Text(
                           "Brand: ${Pdata[index]["brand"]}",
                           style: TextStyle(
@@ -112,11 +106,8 @@ class _ProductScreenState extends State<ProductScreen> {
 
                         SizedBox(height: 6),
 
-
                         Row(
                           children: [
-
-
                             Text(
                               "৳,${Pdata[index]["price"]}",
                               style: TextStyle(
@@ -127,7 +118,6 @@ class _ProductScreenState extends State<ProductScreen> {
                             ),
 
                             SizedBox(width: 8),
-
 
                             Text(
                               "৳,${Pdata[index]["old_price"]}",
@@ -147,8 +137,7 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
           );
         },
-      )
-
+      ),
     );
   }
 }
