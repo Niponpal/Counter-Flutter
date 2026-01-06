@@ -1,10 +1,35 @@
 
+
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
-class ProductScreen extends StatelessWidget {
+import '../../Controller/services/ui.dart';
+
+class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
 
   @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+
+  List Pdata =[];
+  @override
+  getdata()async{
+   Pdata= await ProudctController().getProduct();
+   setState(() {
+
+   });
+   log("==============${Pdata}");
+  }
+  @override
+  void initState() {
+    getdata();
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -12,7 +37,7 @@ class ProductScreen extends StatelessWidget {
         centerTitle: true,
         title: Text("This is a Product pages",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 20),),),
       body: ListView.builder(
-        itemCount: 5,
+        itemCount: Pdata.length,
         padding: EdgeInsets.all(10),
         itemBuilder: (context, index) {
           return Card(
@@ -35,7 +60,7 @@ class ProductScreen extends StatelessWidget {
                       color: Colors.grey.shade300,
                       image: DecorationImage(
                         image: NetworkImage(
-                          "https://via.placeholder.com/150",
+                          "https://eplay.coderangon.com/public/storage/${Pdata[index]['image']}",
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -52,7 +77,7 @@ class ProductScreen extends StatelessWidget {
 
 
                         Text(
-                          "Wireless Headphone",
+                          "${Pdata[index]["title"]}",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -61,9 +86,24 @@ class ProductScreen extends StatelessWidget {
 
                         SizedBox(height: 4),
 
+                        Text(
+                          "category: ${Pdata[index]["category"]}",
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+
 
                         Text(
-                          "Brand: Sony",
+                          "Brand: ${Pdata[index]["brand"]}",
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        Text(
+                          "stock: ${Pdata[index]["stock"]}",
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey[700],
@@ -76,9 +116,9 @@ class ProductScreen extends StatelessWidget {
                         Row(
                           children: [
 
-                            
+
                             Text(
-                              "৳2,500",
+                              "৳,${Pdata[index]["price"]}",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -90,7 +130,7 @@ class ProductScreen extends StatelessWidget {
 
 
                             Text(
-                              "৳3,000",
+                              "৳,${Pdata[index]["old_price"]}",
                               style: TextStyle(
                                 fontSize: 13,
                                 decoration: TextDecoration.lineThrough,
