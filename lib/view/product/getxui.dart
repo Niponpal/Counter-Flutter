@@ -10,15 +10,36 @@ class ProductGetxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        centerTitle: true,
-        title: Text(
-          "This is a Product pages",
-          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+        appBar: AppBar(
+          elevation: 2,
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black87),
+            onPressed: () {
+             // Navigator.pop(context);
+            },
+          ),
+          title: Text(
+            "Product Details",
+            style: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+              letterSpacing: 0.5,
+            ),
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.shopping_cart_outlined, color: Colors.black87),
+              onPressed: () {
+                // cart action
+              },
+            ),
+          ],
         ),
-      ),
-      body:Obx(() =>  ListView.builder(
+
+        body:Obx(() =>  ListView.builder(
         itemCount:cc.data.length,
         padding: EdgeInsets.all(10),
         itemBuilder: (context, index) {
